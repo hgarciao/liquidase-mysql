@@ -1,0 +1,11 @@
+pipeline:
+  setup:
+   image: docker:git
+   commands:
+     - git clone https://github.com/hgarciao/gtwhatcc.git
+     - git clone https://github.com/hgarciao/mspostshatcc.git
+services:
+  postgres:
+    image: jhipster/jhipster-registry:v3.0.3
+    environment:
+      - SPRING_SECURITY_USER_PASSWORD=hgarcia
