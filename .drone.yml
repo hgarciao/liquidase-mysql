@@ -1,11 +1,53 @@
+workspace:
+  base: /target
+
 pipeline:
-  setup:
+  clone-apps:
    image: docker:git
    commands:
+     - cd /target
      - git clone https://github.com/hgarciao/gtwhatcc.git
      - git clone https://github.com/hgarciao/mspostshatcc.git
+     - ls
+  ssh:
+    image: appleboy/drone-ssh
+    host: vps135621.vps.ovh.ca
+    username: root
+    password: Cj57AQCn
+    port: 22
+    script:
+      - tar -czvf mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql
+      - tar -czvf mongo.tar.gz /home/ubuntu/ambientes/dev/data/mongo
+  scp:
+    image: appleboy/drone-scp
+    host: vps135621.vps.ovh.ca 
+    username: root
+    password: Cj57AQCn
+    port: 22
+    target: 
+      - /target
+      - /target
+    source:
+      - mysql.tar.gz
+      - mongo.tar.gz
+  alpine:
+    image: alpine
+    commands:
+      - cd /target
+      - tar -xzvf mysql.tar.gz
+      - tar -xzvf mongo.tar.gz
+  init-mongo:
+    image: mongo:3.4-jessie
+    volumes:
+      - /target/mongo:/var/run/docker.sock
+    detach: true
+  init-mysql:
+    image: mysql:5.7
+    volumes:
+      - /target/mysql:/var/run/docker.sock
+    detach: true
 services:
-  postgres:
+  jhipster-registry:
     image: jhipster/jhipster-registry:v3.0.3
     environment:
       - SPRING_SECURITY_USER_PASSWORD=hgarcia
