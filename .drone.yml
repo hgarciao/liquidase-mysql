@@ -50,4 +50,4 @@ services:
   jhipster-registry:
     image: jhipster/jhipster-registry:v3.0.3
     environment:
-      - SPRING_SECURITY_USER_PASSWORD=hgarcia
+      - SPRING_SECURITY_USER_PASSWORD=hgarciao
