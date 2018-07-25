@@ -9,17 +9,17 @@ pipeline:
      - git clone https://github.com/hgarciao/gtwhatcc.git
      - git clone https://github.com/hgarciao/mspostshatcc.git
      - ls
-  ssh:
-    image: appleboy/drone-ssh
-    host: vps135621.vps.ovh.ca
-    username: root
-    password: Cj57AQCn
-    port: 22
-    script:
-      - cp -r /home/ubuntu/ambientes/dev/data/mongo /home/ubuntu/mongo
-      - cp -r /home/ubuntu/ambientes/dev/data/mysql /home/ubuntu/mysql
-      - tar -czvf mongo.tar.gz /home/ubuntu/mongo
-      - tar -czvf mysql.tar.gz /home/ubuntu/mysql
+  #ssh:
+  #  image: appleboy/drone-ssh
+  #  host: vps135621.vps.ovh.ca
+  #  username: root
+  #  password: Cj57AQCn
+  #  port: 22
+  #  script:
+  #    - cp -r /home/ubuntu/ambientes/dev/data/mongo /home/ubuntu/mongo
+  #    - cp -r /home/ubuntu/ambientes/dev/data/mysql /home/ubuntu/mysql
+  #    - tar -czvf mongo.tar.gz /home/ubuntu/mongo
+  #    - tar -czvf mysql.tar.gz /home/ubuntu/mysql
   scp:
     image: appleboy/drone-scp
     host: vps135621.vps.ovh.ca
@@ -30,8 +30,8 @@ pipeline:
       - /target
       - /target
     source:
-      - mysql.tar.gz
-      - mongo.tar.gz
+      - /mysql.tar.gz
+      - /mongo.tar.gz
   alpine:
     image: alpine
     commands:
@@ -48,8 +48,8 @@ pipeline:
     volumes:
       - /target/mysql:/var/run/docker.sock
     detach: true
-services:
-  jhipster-registry:
-    image: jhipster/jhipster-registry:v3.0.3
-    environment:
-      - SPRING_SECURITY_USER_PASSWORD=hgarciao
+#services:
+#  jhipster-registry:
+#    image: jhipster/jhipster-registry:v3.0.3
+#    environment:
+#      - SPRING_SECURITY_USER_PASSWORD=hgarciao
