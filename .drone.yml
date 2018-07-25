@@ -16,10 +16,12 @@ pipeline:
     password: Cj57AQCn
     port: 22
     script:
-      - cp /home/ubuntu/ambientes/dev/data/mongo /home/ubuntu/mongo
-      - cp /home/ubuntu/ambientes/dev/data/mysql /home/ubuntu/mysql
+      - cp -r /home/ubuntu/ambientes/dev/data/mongo /home/ubuntu/mongo
+      - cp -r /home/ubuntu/ambientes/dev/data/mysql /home/ubuntu/mysql
       - tar -czvf --warning=no-file-changed mysql.tar.gz /mysql
       - tar -czvf --warning=no-file-changed mongo.tar.gz /mongo
+      - rm -rf /home/ubuntu/mongo
+      - rm -rf /home/ubuntu/mysql
   scp:
     image: appleboy/drone-scp
     host: vps135621.vps.ovh.ca 
