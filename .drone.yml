@@ -24,7 +24,7 @@ pipeline:
       - rm -rf /home/ubuntu/mysql
   scp:
     image: appleboy/drone-scp
-    host: vps135621.vps.ovh.ca 
+    host: vps135621.vps.ovh.ca
     username: root
     password: Cj57AQCn
     port: 22
