@@ -18,10 +18,8 @@ pipeline:
     script:
       - cp -r /home/ubuntu/ambientes/dev/data/mongo /home/ubuntu/mongo
       - cp -r /home/ubuntu/ambientes/dev/data/mysql /home/ubuntu/mysql
-      - tar -czvf --warning=no-file-changed mysql.tar.gz /home/ubuntu/mongo
-      - tar -czvf --warning=no-file-changed mongo.tar.gz /home/ubuntu/mysql
-      - rm -rf /home/ubuntu/mongo
-      - rm -rf /home/ubuntu/mysql
+      - tar -czvf mongo.tar.gz /home/ubuntu/mongo
+      - tar -czvf mysql.tar.gz /home/ubuntu/mysql
   scp:
     image: appleboy/drone-scp
     host: vps135621.vps.ovh.ca
