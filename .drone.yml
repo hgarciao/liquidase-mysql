@@ -20,7 +20,7 @@ pipeline:
   #    - cp -r /home/ubuntu/ambientes/dev/data/mysql /home/ubuntu/mysql
   #    - tar -czvf mongo.tar.gz /home/ubuntu/mongo
   #    - tar -czvf mysql.tar.gz /home/ubuntu/mysql
-  
+
   scp:
     image: appleboy/drone-scp
     host: vps135621.vps.ovh.ca
@@ -29,10 +29,8 @@ pipeline:
     port: 22
     target: 
       - /target
-      - /target
     source:
-      - /mysql.tar.gz
-      - /mongo.tar.gz
+      - /*.tar.gz
   alpine:
     image: alpine
     commands:
