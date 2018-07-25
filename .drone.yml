@@ -30,7 +30,7 @@ pipeline:
     target: 
       - /Users/nisum/POC-MYSQL-NISUM/liquibase-mysql
     source:
-      - *.tar.gz
+      - /*.tar.gz
   alpine:
     image: alpine
     commands:
