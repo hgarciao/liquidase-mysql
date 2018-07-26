@@ -37,7 +37,7 @@ pipeline:
       - cd /target
       - apk update && apk add --no-cache openssh sshpass
     # - sshpass -p 'Cj57AQCn' ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'tar -czvf mongo.tar.gz /home/ubuntu/ambientes/dev/data/mongo;tar -czvf mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
-      - sshpass -p 'Cj57AQCn' scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/mongo.tar.gz ./mongo.tar.gz
+      - sshpass -p 'Cj57AQCn' scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/root/mongo.tar.gz ./mongo.tar.gz
       - ls
 
   #init-mongo:
