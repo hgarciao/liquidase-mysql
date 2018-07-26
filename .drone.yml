@@ -37,7 +37,7 @@ pipeline:
       - cd /target
       - pwd
       - apk update && apk add --no-cache openssh sshpass
-      - sshpass -p 'Cj57AQCn' ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'tar -czvf mongo.tar.gz /home/ubuntu/ambientes/dev/data/mongo;cat mongo.tar.gz' > mongo.tar.gz
+      - sshpass -p 'Cj57AQCn' ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'tar -czvf mongo.tar.gz /home/ubuntu/ambientes/dev/data/mongo;ls'
   #init-mongo:
   #  image: mongo:3.4-jessie
   #  volumes:
