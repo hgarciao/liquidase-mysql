@@ -28,9 +28,9 @@ pipeline:
     password: Cj57AQCn
     port: 22
     target: 
-      - /Users/nisum/POC-MYSQL-NISUM/liquibase-mysql
+      - /target
     source:
-      - mysql.tar.gz
+      - /home/ubuntu/mysql
   alpine:
     image: alpine
     commands:
