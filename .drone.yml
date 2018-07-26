@@ -21,22 +21,23 @@ pipeline:
   #    - tar -czvf mongo.tar.gz /home/ubuntu/mongo
   #    - tar -czvf mysql.tar.gz /home/ubuntu/mysql
 
-  scp:
-    image: appleboy/drone-scp
-    host: vps135621.vps.ovh.ca
-    username: root
-    password: Cj57AQCn
-    port: 22
-    target: 
-      - /target
-    source:
-      - /home/ubuntu/mysql
+  #scp:
+  #  image: appleboy/drone-scp
+  #  host: vps135621.vps.ovh.ca
+  #  username: root
+  #  password: Cj57AQCn
+  #  port: 22
+  #  target: 
+  #    - /target
+  #  source:
+  #    - /home/ubuntu/mysql
   alpine:
     image: alpine
     commands:
       - cd /target
-      - tar -xzvf mysql.tar.gz
-      - tar -xzvf mongo.tar.gz
+      - pwd
+      - apk update && apk add --no-cache openssh sshpass
+      - sshpass -p 'Cj57AQCn' ssh root@vps135621.vps.ovh.ca 'ls'
   init-mongo:
     image: mongo:3.4-jessie
     volumes:
