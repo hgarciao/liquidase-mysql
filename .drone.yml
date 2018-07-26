@@ -2,13 +2,13 @@ workspace:
   base: /target
 
 pipeline:
-  clone-apps:
-   image: docker:git
-   commands:
-     - cd /target
-     - git clone https://github.com/hgarciao/gtwhatcc.git
-     - git clone https://github.com/hgarciao/mspostshatcc.git
-     - ls
+  #clone-apps:
+  # image: docker:git
+  # commands:
+  #   - cd /target
+  #   - git clone https://github.com/hgarciao/gtwhatcc.git
+  #   - git clone https://github.com/hgarciao/mspostshatcc.git
+  #   - ls
   #ssh:
   #  image: appleboy/drone-ssh
   #  host: vps135621.vps.ovh.ca
@@ -30,7 +30,7 @@ pipeline:
     target: 
       - /Users/nisum/POC-MYSQL-NISUM/liquibase-mysql
     source:
-      - /*.tar.gz
+      - /mysql.tar.gz
   alpine:
     image: alpine
     commands:
