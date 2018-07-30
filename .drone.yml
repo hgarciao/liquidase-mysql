@@ -1,11 +1,13 @@
 workspace:
   base: /workspace
 pipeline:
-  scp:
-    image: appleboy/drone-scp
-    host: vps135621.vps.ovh.ca
-    username: root
-    password: Cj57AQCn
-    port: 22
-    target: /home/hheyomar16
-    source: /home/ubuntu/mysql.tar.gz
+  copying-volume:
+    image: alpine
+    commands:
+      - apk update && apk add --no-cache openssh sshpass
+    #host: vps135621.vps.ovh.ca
+    #username: root
+    #password: Cj57AQCn
+    ##port: 22
+    #target: /home/hheyomar16
+    #source: /home/ubuntu/mysql.tar.gz
