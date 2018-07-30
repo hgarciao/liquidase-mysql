@@ -1,47 +1,11 @@
 workspace:
-  base: /target
-
+  base: workspace
 pipeline:
-  #clone-apps:
-  #  image: docker:git
-  #  commands:
-  #   - cd /target
-  #   - git clone https://github.com/hgarciao/gtwhatcc.git
-  #   - git clone https://github.com/hgarciao/mspostshatcc.git
-  #   - ls
   scp:
     image: appleboy/drone-scp
     host: vps135621.vps.ovh.ca
     username: root
     password: Cj57AQCn
     port: 22
-    target: 
-      - /target
-    source:
-      - /root/mongo.tar.gz
-  #alpine:
-  #  image: alpine
-  #  commands:
-  #    - cd /target
-  #    - apk update && apk add --no-cache openssh sshpass
-  #    - sshpass -p 'Cj57AQCn' ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'tar -czvf mongo.tar.gz /home/ubuntu/ambientes/dev/data/mongo;tar -czvf mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
-  #    - sshpass -p 'Cj57AQCn' scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/root/mongo.tar.gz ./mongo.tar.gz
-  #    - sshpass -p 'Cj57AQCn' scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/root/mysql.tar.gz ./mysql.tar.gz
-  #    - tar -xzvf mysql.tar.gz
-  #    - tar -xzvf mongo.tar.gz
-  #    - ls
-  #init-mongo:
-  #   image: mongo:3.4-jessie
-  #  volumes:
-  #    - /target/mongo:/var/run/docker.sock
-  #  detach: true
-  #init-mysql:
-  #  image: mysql:5.7
-  #  volumes:
-  #    - /target/mysql:/var/run/docker.sock
-  #  detach: true
-#services:
-#  jhipster-registry:
-#    image: jhipster/jhipster-registry:v3.0.3
-#    environment:
-#      - SPRING_SECURITY_USER_PASSWORD=hgarciao
+    target: /home/hheyomar16
+    source: /home/ubuntu/mysql.tar.gz
