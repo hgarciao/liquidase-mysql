@@ -5,6 +5,10 @@ pipeline:
     image: alpine
     commands:
       - apk update && apk add --no-cache openssh sshpass
+      - cd /workspace
+      - export SSHPASS=Cj57AQCn
+      - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
+      - ls 
     #host: vps135621.vps.ovh.ca
     #username: root
     #password: Cj57AQCn
