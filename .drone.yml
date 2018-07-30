@@ -1,5 +1,5 @@
 workspace:
-  base: workspace
+  base: /workspace
 pipeline:
   scp:
     image: appleboy/drone-scp
