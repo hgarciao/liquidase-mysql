@@ -8,7 +8,12 @@ pipeline:
       - cd /workspace
       - export SSHPASS=Cj57AQCn
       - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
-      - ls 
+      - tar -xzvf mysql.tar.gz
+  mysql:
+    image: mysql:5.7
+    detach: true
+    volumes:
+      - /workspace/mysql:/var/lib/mysql
     #host: vps135621.vps.ovh.ca
     #username: root
     #password: Cj57AQCn
