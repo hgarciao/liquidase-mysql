@@ -22,7 +22,7 @@ pipeline:
   starting-ms-gateway:
      image: hgarcio/gtwhatcc
      environment:
-       - profile: drone
+       - profile=drone
   running-tests:
      image: alpine
      commands:
