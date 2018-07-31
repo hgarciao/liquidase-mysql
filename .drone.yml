@@ -15,6 +15,7 @@ pipeline:
   testing-mysql:
     image: naqoda/mysql-client
     commands:
+      - sleep 30
       - mysql --host=mysql --user=root --password=qwerty --execute='show tables;'
 services:
   mysql:
