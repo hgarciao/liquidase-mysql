@@ -16,10 +16,10 @@ pipeline:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=qwerty
-  #testing-mysql:
-  #  image: naqoda/mysql-client
-  #  commands:
-  #    - mysql --host=mysql --user=root --password=qwerty --execute='show tables;'
+  testing-mysql:
+    image: naqoda/mysql-client
+    commands:
+      - mysql --host=mysql --user=root --password=qwerty --execute='show tables;'
 #services:
 #  mysql:
  #   image: mysql:5.7
