@@ -1,5 +1,3 @@
-workspace:
-  base: /workspace
 pipeline:
   copying-volume:
     image: alpine
@@ -9,9 +7,11 @@ pipeline:
       - export SSHPASS=Cj57AQCn
       - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
       - tar -xzvf mysql.tar.gz
+      - mv mysql mysql-v
+      - mv mysql-v/* .
       - ls
-      - cd mysql
-      - ls
+    volumes:
+      - worskpace-drone:/workspace
   testing-mysql:
     image: naqoda/mysql-client
     commands:
@@ -20,11 +20,8 @@ pipeline:
 services:
   mysql:
    image: mysql:5.7
-   commands:
-    - pwd
-   environment:
-    - MYSQL_ROOT_PASSWORD=qwerty
-
+   volumes:
+      - worskpace-drone:/var/lib/mysql
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
