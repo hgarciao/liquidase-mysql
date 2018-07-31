@@ -34,6 +34,10 @@ pipeline:
       - COMMAND=changeLogSync
       - CHANGELOGPATH=./db.changelog-master.xml
       - MYSQLHOST=mysql
+  starting-ms-gateway:
+    image: hgarcio/gtwhatcc
+    environment:
+     - profile=drone
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
