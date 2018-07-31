@@ -14,9 +14,9 @@ pipeline:
       - ls
   mysql:
     image: mysql:5.7
+    detach: true
     environment:
       - MYSQL_ROOT_PASSWORD=qwerty
-    detach: true
   testing-mysql:
     image: naqoda/mysql-client
     commands:
