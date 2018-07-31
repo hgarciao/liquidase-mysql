@@ -9,24 +9,29 @@ pipeline:
       - export SSHPASS=Cj57AQCn
       - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
       - tar -xzvf mysql.tar.gz
+      - ls
   mysql:
     image: mysql:5.7
     detach: true
     volumes:
       - /workspace/mysql:/var/lib/mysql
+  testing-mysql:
+    image: naqoda/mysql-client
+    commands:
+      - mysql --host=mysql --user=root --password=hg$% --database=GtwHatcc --execute='show tables;'
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
   # - En caso de pasar encontrar las diferencias entre bases de datos
   # -  VERIFICAR PARA MI SOLO SI COINCIDE CON LOS CAMBIOS QUE SE HICIERON --> No necesario por el momento jeje
-  starting-ms-gateway:
-     image: hgarcio/gtwhatcc
-     environment:
-       - profile=drone
-  running-tests:
-     image: alpine
-     commands:
-      - echo "Correre unas llamadas a las API jeje"
+  #starting-ms-gateway:
+  #   image: hgarcio/gtwhatcc
+  #   environment:
+  #     - profile=drone
+  #running-tests:
+  #   image: alpine
+  #   commands:
+  #    - echo "Correre unas llamadas a las API jeje"
   #CORRER ALGUNOS TEST : crear algun contenedor que haga algunas llamadas a las API si funca todo fresh
 
     #host: vps135621.vps.ovh.ca
@@ -35,3 +40,8 @@ pipeline:
     ##port: 22
     #target: /home/hheyomar16
     #source: /home/ubuntu/mysql.tar.gz
+
+    docker run --rm \
+     \
+    
+Dump a database
