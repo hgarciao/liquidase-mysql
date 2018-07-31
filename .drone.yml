@@ -14,6 +14,7 @@ pipeline:
       - export SSHPASS=Cj57AQCn
       - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
       - tar -xzvf mysql.tar.gz
+      - ls
       - mv mysql mysql-v
       - mv mysql-v/* .
       - ls
