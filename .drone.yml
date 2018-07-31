@@ -10,6 +10,8 @@ pipeline:
       - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
       - tar -xzvf mysql.tar.gz
       - ls
+      - cd mysql
+      - ls
   mysql:
     image: mysql:5.7
     volumes:
@@ -19,8 +21,8 @@ pipeline:
   testing:
     image: alpine
     commands:
-      - ping mysql
       - ping mysql2
+      - ping mysql
 
 services:
   mysql2:
