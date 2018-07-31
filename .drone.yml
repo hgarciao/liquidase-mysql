@@ -40,8 +40,3 @@ pipeline:
     ##port: 22
     #target: /home/hheyomar16
     #source: /home/ubuntu/mysql.tar.gz
-
-    docker run --rm \
-     \
-    
-Dump a database
