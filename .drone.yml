@@ -4,7 +4,7 @@ pipeline:
     commands:
       - apk update && apk add --no-cache openssh sshpass
       - export SSHPASS=Cj57AQCn
-      - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf mysql.tar.gz;tar -czvf /home/ubuntu/mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
+      - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf mysql.tar.gz;tar -czvf /home/ubuntu/mysql.tar.gz -C /home/ubuntu/ambientes/dev/data/mysql'
   copying-mysql-data:
     image: alpine
     commands:
