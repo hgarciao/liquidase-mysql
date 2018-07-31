@@ -37,7 +37,7 @@ pipeline:
   starting-ms-gateway:
     image: hgarcio/gtwhatcc
     environment:
-     - profile=drone
+     - PROFILE=drone
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
