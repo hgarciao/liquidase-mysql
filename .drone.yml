@@ -19,11 +19,20 @@ pipeline:
       - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
       - worskpace-drone:/workspace
-  mysql:
+  starting-mysql:
    image: mysql:5.7
    volumes:
       - worskpace-drone:/var/lib/mysql
    detach: true
+  liquibase-changes:
+   image: hgarcio/alpine-liquibase
+   environment:
+      - MYSQLPORT=3306
+      - MYSQLDB=GtwHatcc
+      - MYSQLUSER=root
+      - MYSQLPASS=hg$%
+      - COMMAND=changeLogSync
+      - CHANGELOGPATH=./db.changelog-master.xml
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
