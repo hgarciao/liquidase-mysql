@@ -9,8 +9,8 @@ pipeline:
     image: alpine
     commands:
       - apk update && apk add --no-cache openssh sshpass
-      - rm -rf /workspace/*
       - cd /workspace
+      - ls
       - export SSHPASS=Cj57AQCn
       - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
       - tar -xzvf mysql.tar.gz
@@ -19,11 +19,11 @@ pipeline:
       - ls
       - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
-      - worskpace-drone:/workspace
+      - worskpace-drone-mysql:/workspace
   mysql:
    image: mysql:5.7
    volumes:
-      - worskpace-drone:/var/lib/mysql
+      - worskpace-drone-mysql:/var/lib/mysql
    detach: true
   liquibase-changes:
    image: hgarcio/alpine-liquibase
