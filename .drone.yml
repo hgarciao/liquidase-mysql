@@ -20,6 +20,9 @@ pipeline:
 services:
   mysql:
    image: mysql:5.7
+   commands:
+      - cd /var/lib/mysql
+      - ls
    volumes:
       - worskpace-drone:/var/lib/mysql
   #APLICAR CAMBIOS LIQUIBASE
