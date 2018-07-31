@@ -12,20 +12,19 @@ pipeline:
       - ls
       - cd mysql
       - ls
-  mysql:
-    image: mysql:5.7
-    volumes:
-      - /workspace/mysql:/var/lib/mysql
-    detach: true
+  #mysql:
+  #  image: mysql:5.7
+  #  volumes:
+  #    - /workspace/mysql:/var/lib/mysql
+  #  detach: true
 
   testing:
     image: alpine
     commands:
-      - ping mysql2
       - ping mysql
 
 services:
-  mysql2:
+  mysql:
     image: mysql:5.7
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
