@@ -20,11 +20,11 @@ pipeline:
       - ls
       - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
-      - worskpace-drone-mysql:/workspace
+      - workspace-drone-mysql:/workspace
   mysql:
    image: mysql:5.7
    volumes:
-      - worskpace-drone-mysql:/var/lib/mysql
+      - workspace-drone-mysql:/var/lib/mysql
    detach: true
   liquibase-changes:
    image: hgarcio/alpine-liquibase
