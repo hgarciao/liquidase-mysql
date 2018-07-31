@@ -18,7 +18,7 @@ pipeline:
   testing-mysql:
     image: naqoda/mysql-client
     commands:
-      - mysql --host=127.0.0.1 --user=root --password=hg$% --database=GtwHatcc --execute='show tables;'
+      - mysql --host=localhost --user=root --password=hg$% --database=GtwHatcc --execute='show tables;'
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
