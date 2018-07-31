@@ -16,10 +16,10 @@ pipeline:
    image: mysql:5.7
    volumes:
       - worskpace-drone:/var/lib/mysql
+   detach: true
   testing-mysql:
     image: naqoda/mysql-client
     commands:
-      - sleep 30
       - mysql --host=mysql --user=root --password=qwerty --execute='show tables;  
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
