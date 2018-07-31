@@ -12,13 +12,21 @@ pipeline:
       - ls
   mysql:
     image: mysql:5.7
-    detach: true
     volumes:
       - /workspace/mysql:/var/lib/mysql
+    detach: true
+
   testing-mysql:
     image: naqoda/mysql-client
     commands:
-      - mysql --host=localhost --user=root --password=hg$% --database=GtwHatcc --execute='show tables;'
+      - mysql --host=mysql2 --user=root --password=hg$% --database=GtwHatcc --execute='show tables;'
+      - mysql --host=mysql --user=root --password=hg$% --database=GtwHatcc --execute='show tables;'
+
+services:
+  mysql2:
+    image: mysql:5.7
+    volumes:
+      - /workspace/mysql:/var/lib/mysql
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
