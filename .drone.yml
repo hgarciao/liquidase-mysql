@@ -26,6 +26,8 @@ pipeline:
 services:
   mysql:
     image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=qwerty
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
