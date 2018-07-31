@@ -1,13 +1,13 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="nisum (generated)" id="1532211987049-1">
+    <changeSet author="nisum (generated)" id="1533069090572-1">
         <createTable tableName="jhi_authority">
             <column name="name" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-2">
+    <changeSet author="nisum (generated)" id="1533069090572-2">
         <createTable tableName="jhi_persistent_audit_event">
             <column autoIncrement="true" name="event_id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -19,7 +19,7 @@
             <column name="event_type" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-3">
+    <changeSet author="nisum (generated)" id="1533069090572-3">
         <createTable tableName="jhi_persistent_audit_evt_data">
             <column name="event_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -30,7 +30,7 @@
             <column name="value" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-4">
+    <changeSet author="nisum (generated)" id="1533069090572-4">
         <createTable tableName="jhi_user">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -61,7 +61,7 @@
             <column defaultValueNumeric="0" name="first_time" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-5">
+    <changeSet author="nisum (generated)" id="1533069090572-5">
         <createTable tableName="jhi_user_authority">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -71,50 +71,50 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-6">
+    <changeSet author="nisum (generated)" id="1533069090572-6">
         <addPrimaryKey columnNames="name" constraintName="PRIMARY" tableName="jhi_authority"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-7">
+    <changeSet author="nisum (generated)" id="1533069090572-7">
         <addPrimaryKey columnNames="event_id, name" constraintName="PRIMARY" tableName="jhi_persistent_audit_evt_data"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-8">
+    <changeSet author="nisum (generated)" id="1533069090572-8">
         <addPrimaryKey columnNames="user_id, authority_name" constraintName="PRIMARY" tableName="jhi_user_authority"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-9">
+    <changeSet author="nisum (generated)" id="1533069090572-9">
         <addUniqueConstraint columnNames="email" constraintName="email" tableName="jhi_user"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-10">
+    <changeSet author="nisum (generated)" id="1533069090572-10">
         <addUniqueConstraint columnNames="email" constraintName="idx_user_email" tableName="jhi_user"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-11">
+    <changeSet author="nisum (generated)" id="1533069090572-11">
         <addUniqueConstraint columnNames="login" constraintName="idx_user_login" tableName="jhi_user"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-12">
+    <changeSet author="nisum (generated)" id="1533069090572-12">
         <addUniqueConstraint columnNames="login" constraintName="login" tableName="jhi_user"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-13">
+    <changeSet author="nisum (generated)" id="1533069090572-13">
         <createIndex indexName="fk_authority_name" tableName="jhi_user_authority">
             <column name="authority_name"/>
         </createIndex>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-14">
+    <changeSet author="nisum (generated)" id="1533069090572-14">
         <createIndex indexName="idx_persistent_audit_event" tableName="jhi_persistent_audit_event">
             <column name="principal"/>
             <column name="event_date"/>
         </createIndex>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-15">
+    <changeSet author="nisum (generated)" id="1533069090572-15">
         <createIndex indexName="idx_persistent_audit_evt_data" tableName="jhi_persistent_audit_evt_data">
             <column name="event_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-16">
+    <changeSet author="nisum (generated)" id="1533069090572-16">
         <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="fk_authority_name" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="name" referencedTableName="jhi_authority"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-17">
+    <changeSet author="nisum (generated)" id="1533069090572-17">
         <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="fk_evt_pers_audit_evt_data" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event"/>
     </changeSet>
-    <changeSet author="nisum (generated)" id="1532211987049-18">
+    <changeSet author="nisum (generated)" id="1533069090572-18">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="fk_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jhi_user"/>
     </changeSet>
 </databaseChangeLog>

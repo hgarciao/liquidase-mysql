@@ -4,7 +4,7 @@ pipeline:
     commands:
       - apk update && apk add --no-cache openssh sshpass
       - export SSHPASS=Cj57AQCn
-      - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf mysql.tar.gz;tar -czvf /home/ubuntu/mysql.tar.gz /home/ubuntu/ambientes/qa/data/mysql'
+      - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf mysql.tar.gz;tar -czvf /home/ubuntu/mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
   copying-mysql-data:
     image: alpine
     commands:
@@ -16,6 +16,7 @@ pipeline:
       - mv mysql mysql-v
       - mv mysql-v/* .
       - ls
+      - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
       - worskpace-drone:/workspace
   mysql:
@@ -23,10 +24,39 @@ pipeline:
    volumes:
       - worskpace-drone:/var/lib/mysql
    detach: true
-  testing-mysql:
-    image: naqoda/mysql-client
-    commands:
-      - mysql --host=mysql --user=root --password=hg$% --database=GtwHatcc --execute='show tables;' 
+  liquibase-changes:
+    image: sequenceiq/liquibase
+    environment:
+      - CONNECTION_STRING=jdbc:mysql://mysql:3306/GtwHatcc?useUnicode=true&characterEncoding=utf8&useSSL=false
+      - DB_USER=root
+      - DB_PASS=Cj57AQCn
+
+
+
+
+docker run -it \
+--name $LIQUIBASE_CONTAINER \
+--link $REFERENCE_DB_CONTAINER:db \
+--entrypoint="/scripts/liquibase_command.sh" \
+-e CONNECTION_STRING="jdbc:postgresql://$DB_IP:5432/$DB_NAME" \
+-e DB_USER="$DB_USER" \
+-e DB_PASS="$DB_PASS" \
+-e LIQUIBASE_INCLUSION_FILE="$LIQUIBASE_INCLUSION_FILE" \
+-v /$LIQUIBASE_CHANGELOGS:/changelogs \
+sequenceiq/docker-liquibase \
+"diff"
+The variables should be set as follows:
+
+LIQUIBASE_CONTAINER - the name of the docker container
+REFERENCE_DB_CONTAINER - the docker container running a (postgres) database being the reference of the diff command
+CONNECTION_STRING - the connection to the target database
+DB_IP - the IP address of the target database
+DB_NAME - the target database name
+DB_USER - the user to the target database
+DB_PASS - password to the target database
+LIQUIBASE_INCLUSION_FILE - changelog file name in the changelogs folder, the generated diff file will be added as an include tag to it if provided
+LIQUIBASE_CHANGELOGS - volume on the host machine, where the generated file will be written
+  
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
