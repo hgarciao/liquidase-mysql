@@ -12,19 +12,15 @@ pipeline:
       - ls
     volumes:
       - worskpace-drone:/workspace
+  mysql:
+   image: mysql:5.7
+   volumes:
+      - worskpace-drone:/var/lib/mysql
   testing-mysql:
     image: naqoda/mysql-client
     commands:
       - sleep 30
-      - mysql --host=mysql --user=root --password=qwerty --execute='show tables;'
-services:
-  mysql:
-   image: mysql:5.7
-   commands:
-      - cd /var/lib/mysql
-      - ls
-   volumes:
-      - worskpace-drone:/var/lib/mysql
+      - mysql --host=mysql --user=root --password=qwerty --execute='show tables;  
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
