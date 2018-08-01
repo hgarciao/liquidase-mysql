@@ -37,10 +37,12 @@ pipeline:
       - COMMAND=changeLogSync
       - CHANGELOGPATH=./db.changelog-master.xml
       - MYSQLHOST=mysql
-  starting-ms-gateway:
-    image: hgarcio/gtwhatcc
-    environment:
-     - PROFILE=drone
+  setup:
+   image: docker:git
+   commands:
+     - git clone https://github.com/foo/bar.git
+     - git checkout dev
+     - git branch
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
