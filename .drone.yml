@@ -40,10 +40,9 @@ pipeline:
   setup:
    image: docker:git
    commands:
-     - git clone https://github.com/foo/bar.git
+     - git clone https://github.com/hgarciao/gtwhatcc.git
      - git checkout dev
      - git branch
-     - ls -lah
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
