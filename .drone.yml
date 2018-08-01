@@ -23,6 +23,7 @@ pipeline:
       - sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
       - workspace-drone-mysql:/workspace
+    secrets: [server_hostname,SERVER_HOSTNAME]
   mysql:
    image: mysql:5.7
    volumes:
