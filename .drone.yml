@@ -3,23 +3,23 @@ pipeline:
     image: alpine
     commands:
       - apk update && apk add --no-cache openssh sshpass
-      - export SSHPASS=Cj57AQCn
-      - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'tar -czvf /home/ubuntu/mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
+      - export SSHPASS=$SERVER_PASSWORD
+      - sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME 'tar -czvf /home/ubuntu/mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
   copying-mysql-data:
     image: alpine
     commands:
       - apk update && apk add --no-cache openssh sshpass
       - cd /workspace
       - rm -rf /workspace/*
-      - export SSHPASS=Cj57AQCn
-      - sshpass -e scp -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
+      - export SSHPASS=$SERVER_PASSWORD
+      - sshpass -e scp -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME:/home/ubuntu/mysql.tar.gz mysql.tar.gz 
       - tar -xzvf mysql.tar.gz
       - ls
       - mv home/ubuntu/ambientes/dev/data/mysql mysql-v
       - mv mysql-v/* .
       - rm -rf home
       - ls
-      - sshpass -e ssh -o StrictHostKeyChecking=no root@vps135621.vps.ovh.ca 'rm -rf /home/ubuntu/mysql.tar.gz'
+      - sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
       - workspace-drone-mysql:/workspace
   mysql:
