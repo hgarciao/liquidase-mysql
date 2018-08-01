@@ -2,7 +2,7 @@ pipeline:
   backup-mysql-data:
     image: alpine
     commands:
-      - echo $${SERVER_HOSTNAME}
+      - echo "${SERVER_HOSTNAME}"
       - apk update && apk add --no-cache openssh sshpass
       - export SSHPASS=$SERVER_PASSWORD
       - sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME 'tar -czvf /home/ubuntu/mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
