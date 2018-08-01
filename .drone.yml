@@ -3,9 +3,11 @@ pipeline:
     image: alpine
     commands:
       - echo "$SERVER_HOSTNAME"
+      - echo "$server_hostname"
       - apk update && apk add --no-cache openssh sshpass
       - export SSHPASS=$SERVER_PASSWORD
       - sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME 'tar -czvf /home/ubuntu/mysql.tar.gz /home/ubuntu/ambientes/dev/data/mysql'
+    secrets: [server_hostname,SERVER_HOSTNAME]
   copying-mysql-data:
     image: alpine
     commands:
@@ -23,7 +25,6 @@ pipeline:
       - sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
       - workspace-drone-mysql:/workspace
-    secrets: [server_hostname,SERVER_HOSTNAME]
   mysql:
    image: mysql:5.7
    volumes:
