@@ -24,6 +24,7 @@ pipeline:
       - sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOSTNAME 'rm -rf /home/ubuntu/mysql.tar.gz'
     volumes:
       - workspace-drone-mysql:/workspace
+    secrets: [server_hostname,server_password,server_user]
   mysql:
    image: mysql:5.7
    volumes:
@@ -45,7 +46,6 @@ pipeline:
      - git clone https://github.com/hgarciao/gtwhatcc.git
      - git checkout dev
      - git branch
-     - ls 
   testing-gateway:
     image: hgarcio/ubuntu-node-java
     commands:
