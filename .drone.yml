@@ -37,12 +37,20 @@ pipeline:
       - COMMAND=changeLogSync
       - CHANGELOGPATH=./db.changelog-master.xml
       - MYSQLHOST=mysql
-  setup:
+  downloading-gateway:
    image: docker:git
    commands:
      - git clone https://github.com/hgarciao/gtwhatcc.git
      - git checkout dev
      - git branch
+     - ls 
+  #testing-gateway:
+  #  image: hgarcio/ubuntu-node-java
+  #  commands:
+  #
+  #   - chmod +x mvnw
+  #   - ./mvnw clean install
+  #   - ./mvnw package -Dspring.profiles.active=test
   #APLICAR CAMBIOS LIQUIBASE
   # - Sincronizar cambios en los archvivos con esta base de datos
   # - Luego correr aplicacion ( siguiente step )
